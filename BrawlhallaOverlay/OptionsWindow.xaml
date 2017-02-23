@@ -1,0 +1,61 @@
+﻿<Window x:Class="BrawlhallaOverlay.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BrawlhallaOverlay"
+        mc:Ignorable="d"
+        Width="220" Height="220"
+        Title="Brawlhalla Ping Overlay" Closing="OptionsWindow_Closing" Loaded="OptionsWindow_Loaded">
+
+    <TabControl TabStripPlacement="Left">
+        <TabItem Header="Servers Enabled">
+            <TabItem.Content>
+                <StackPanel Loaded="ServersEnabled_Loaded">
+                    <Button Width="75" Margin="10,1" Content="US-W" HorizontalAlignment="Center" Click="ServerButton_Clicked" />
+                    <Button Width="75" Margin="10,1" Content="US-E" HorizontalAlignment="Center" Click="ServerButton_Clicked" />
+                    <Button Width="75" Margin="10,1" Content="EU" HorizontalAlignment="Center" Click="ServerButton_Clicked" />
+                    <Button Width="75" Margin="10,1" Content="SEA" HorizontalAlignment="Center" Click="ServerButton_Clicked" />
+                    <Button Width="75" Margin="10,1" Content="AUS" HorizontalAlignment="Center" Click="ServerButton_Clicked" />
+                    <Button Width="75" Margin="10,1" Content="BRZ" HorizontalAlignment="Center" Click="ServerButton_Clicked" />
+                </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+
+        <TabItem Header="Overlay Settings">
+            <TabItem.Content>
+                <StackPanel Loaded="OverlaySettings_Loaded">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Margin" Value="0, 0, 0, 2" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Button Name="OverlayEnabledButton" Content="Overlay Enabled" Click="OverlayEnabled_Clicked"
+                            ToolTip="Hold shift and drag the ping numbers to move them!"/>
+                    <Button Name="OverlayBackgroundButton" Content="Gray Background" Click="GreyBackground_Clicked"
+                            ToolTip="Enable this to display a grey background around the ping numbers."/>
+                    <Button Name="OverlayOutlineButton" Content="Ping Outline" Click="PingOutline_Clicked"
+                            ToolTip="Enable this to display a white outline around the ping numbers."/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="66*"/>
+                            <ColumnDefinition Width="40*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Font Size: " Grid.Column="0"/>
+                        <TextBox Name="FontSizeTextBox" VerticalAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+
+                    <TextBlock Margin="0, 1, 0, 0" Text="Ping Colors" HorizontalAlignment="Center"/>
+                    <Button Name="LowPingButton" Content="Low Ping" Click="PingColor_Clicked"
+                            ToolTip="The color of the ping number when you have low ping."/>
+                    <Button Name="MediumPingButton" Content="Medium Ping" Click="PingColor_Clicked"
+                            ToolTip="The color of the ping number when you have medium ping."/>
+                    <Button Name="HighPingButton" Content="High Ping" Click="PingColor_Clicked"
+                            ToolTip="The color of the ping number when you have high ping."/>
+                </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+    </TabControl>
+</Window>
