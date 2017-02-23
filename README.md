@@ -2,6 +2,9 @@
 
 A simple ping checker and in game overlay for [Brawlhalla](http://www.brawlhalla.com/).
 
+<h2>Download</h2>
+You can get the latest release from [here](https://github.com/Sentinent/BrawlhallaPingOverlay/releases/latest). (You only need to download the .exe)
+
 <h2>Usage</h2>
 The latest release will be a pre-compiled executable with the libraries bundled together. To use it, simply download and run the executable. 
 
