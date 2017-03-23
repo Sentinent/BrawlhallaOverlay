@@ -49,7 +49,7 @@ namespace BrawlhallaOverlay.Overlay
 
             foreach (PingItem child in (this.Content as Canvas).Children)
             {
-                if (child.Text == item.Text)
+                if (child.Server == item.Server)
                 {
                     (this.Content as Canvas).Children.Remove(child);
                     break;
