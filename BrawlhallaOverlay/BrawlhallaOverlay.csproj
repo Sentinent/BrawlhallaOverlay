@@ -65,18 +65,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ColorWindow.xaml.cs">
+    <Compile Include="Ping\ColorWindow.xaml.cs">
       <DependentUpon>ColorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LowLevelMouseHook.cs" />
-    <Compile Include="MouseHookEventArgs.cs" />
-    <Compile Include="PingItem.cs" />
+    <Compile Include="Hooks\LowLevelMouseHook.cs" />
+    <Compile Include="Hooks\MouseHookEventArgs.cs" />
+    <Compile Include="Ping\PingItem.cs" />
     <Compile Include="Utilities.cs" />
-    <Page Include="ColorWindow.xaml">
+    <Page Include="Ping\ColorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OptionsWindow.xaml">
+    <Page Include="Ping\OptionsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,8 +84,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PingConfig.cs" />
-    <Compile Include="OptionsWindow.xaml.cs">
+    <Compile Include="Ping\PingConfig.cs" />
+    <Compile Include="Ping\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -93,7 +93,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PingWindow.xaml">
+    <Page Include="Ping\PingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,10 +102,10 @@
     <Compile Include="Overlay.xaml.cs">
       <DependentUpon>Overlay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PingWindow.xaml.cs">
+    <Compile Include="Ping\PingWindow.xaml.cs">
       <DependentUpon>PingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PingWindowItem.cs" />
+    <Compile Include="Ping\PingWindowItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -137,6 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Damage\" />
+    <Folder Include="Stats\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="CosturaCleanup" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
