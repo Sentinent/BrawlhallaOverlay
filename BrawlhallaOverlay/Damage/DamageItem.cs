@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BrawlhallaOverlay.Overlay;
 
-namespace BrawlhallaOverlay.Overlay
+namespace BrawlhallaOverlay.Damage
 {
-    public interface IOverlayItem
+    public class DamageItem : OverlayItem
     {
 
 

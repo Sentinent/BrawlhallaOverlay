@@ -65,8 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Damage\DamageItem.cs" />
     <Compile Include="Hooks\WindowHook.cs" />
-    <Compile Include="Overlay\IOverlayItem.cs" />
+    <Compile Include="Overlay\OverlayItem.cs" />
     <Compile Include="Ping\ColorWindow.xaml.cs">
       <DependentUpon>ColorWindow.xaml</DependentUpon>
     </Compile>
@@ -141,7 +142,6 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Damage\" />
     <Folder Include="Stats\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

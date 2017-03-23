@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using BrawlhallaOverlay;
+using BrawlhallaOverlay.Overlay;
 
 namespace BrawlhallaOverlay.Ping
 {
@@ -29,45 +29,43 @@ namespace BrawlhallaOverlay.Ping
     }
 
     //Represents a block on the overlay
-    public class PingItem : TextBlock, Overlay.IOverlayItem
+    public class PingItem : OverlayItem
     {
-        public new string Name;
-
-        public double XPos { get; private set; }
-        public double YPos { get; private set; }
+        public string Server { get; private set; }
 
         private PingAverages _pingAverages = new PingAverages();
         private System.Threading.Timer _pingIPTimer;
-        private int _pingErrors = 0;
-        private Config _config = PingConfig.GetConfig();    
+        private int _pingErrors = 0;  
 
         public PingItem(string serverName, string ipToPing, double xPos, double yPos)
         {
-            this.FontWeight = FontWeights.UltraBold;
-            this.FontSize = _config.PingFontSize;
-            this.IsHitTestVisible = false;
+            Server = serverName;
 
-            if (_config.GreyBackground)
+            var config = PingConfig.GetConfig();
+
+            this.FontWeight = FontWeights.UltraBold;
+            this.FontSize = config.PingFontSize;
+            this.IsHitTestVisible = false;
+    
+            if (config.GreyBackground)
             {
                 this.Background = Brushes.LightGray;
             }
-            if (_config.PingOutline)
+            if (config.PingOutline)
             {
                 this.Effect = new DropShadowEffect() { ShadowDepth = 0, BlurRadius = 5, Color = Colors.White, Opacity = 1 };
             }
-
-            Name = serverName;
 
             XPos = xPos;
             YPos = yPos;
 
             _pingIPTimer = new System.Threading.Timer(async (state) =>
             {
-                using (System.Net.NetworkInformation.Ping ping = new System.Net.NetworkInformation.Ping())
+                using (var ping = new System.Net.NetworkInformation.Ping())
                 {
                     try
                     {
-                        System.Net.NetworkInformation.PingReply pReply = await ping.SendPingAsync(ipToPing);
+                        var pReply = await ping.SendPingAsync(ipToPing);
                         if (pReply.Status == System.Net.NetworkInformation.IPStatus.Success)
                         {
                             _pingAverages.Add((int)pReply.RoundtripTime);
@@ -94,9 +92,9 @@ namespace BrawlhallaOverlay.Ping
                     }
                     else
                     {
-                        if (_pingAverages.AveragePing >= 150) this.Foreground = _config.HighPingBrush;
-                        else if (_pingAverages.AveragePing >= 80) this.Foreground = _config.MediumPingBrush;
-                        else this.Foreground = _config.LowPingBrush;
+                        if (_pingAverages.AveragePing >= 150) this.Foreground = config.HighPingBrush;
+                        else if (_pingAverages.AveragePing >= 80) this.Foreground = config.MediumPingBrush;
+                        else this.Foreground = config.LowPingBrush;
 
                         this.Text = $"{serverName}: {_pingAverages.AveragePing}";
                     }

@@ -80,7 +80,7 @@ namespace BrawlhallaOverlay.Ping
 
                 foreach (var server in servers)
                 {
-                    config.ServersEnabled.Add(new Server(server.Name, server.XPos, server.YPos));
+                    config.ServersEnabled.Add(new Server(server.Server, server.XPos, server.YPos));
                 }
             }
         }

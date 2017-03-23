@@ -32,7 +32,6 @@ namespace BrawlhallaOverlay.Ping
             };
             _serverPing = new Label()
             {
-                Content = 0,
                 Width = 50,
                 Margin = new Thickness(5, 2, 20, 2)
             };
