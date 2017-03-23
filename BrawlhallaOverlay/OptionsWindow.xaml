@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrawlhallaOverlay"
         mc:Ignorable="d"
         Width="220" Height="220"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Title="Brawlhalla Ping Overlay" Closing="OptionsWindow_Closing" Loaded="OptionsWindow_Loaded">
 
     <TabControl TabStripPlacement="Left">

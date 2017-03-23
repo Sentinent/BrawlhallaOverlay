@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrawlhallaOverlay"
         mc:Ignorable="d" Title="Brawlhalla Ping Overlay"
         
-        Width="240" Height="200" ResizeMode="NoResize"
+        Width="240" Height="200" ResizeMode="CanMinimize"
         Loaded="PingWindow_Loaded" Closing="PingWindow_Closing">
     <StackPanel Loaded="StackPanel_Loaded">
         

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrawlhallaOverlay"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Title="Color Picker" Width="150" Height="60">
     <xctk:ColorPicker DisplayColorAndName="True" SelectedColorChanged="SelectedColor_Changed">
 
