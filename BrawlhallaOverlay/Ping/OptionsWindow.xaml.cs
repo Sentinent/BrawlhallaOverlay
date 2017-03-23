@@ -215,7 +215,7 @@ namespace BrawlhallaOverlay.Ping
             {          
                 if (_config.PingOutline)
                 {
-                    item.Effect = new DropShadowEffect() { ShadowDepth = 0, BlurRadius = 5, Color = Colors.White, Opacity = 1 };
+                    item.Effect = new DropShadowEffect() { ShadowDepth = 0, BlurRadius = 2, Color = Colors.White, Opacity = 1 };
                 }
                 else
                 {

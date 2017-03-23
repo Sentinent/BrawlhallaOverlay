@@ -37,7 +37,7 @@ namespace BrawlhallaOverlay.Ping
         private System.Threading.Timer _pingIPTimer;
         private int _pingErrors = 0;  
 
-        public PingItem(string serverName, string ipToPing, double xPos, double yPos)
+        public PingItem(string serverName, string ipToPing, double xPos, double yPos) : base()
         {
             Server = serverName;
 

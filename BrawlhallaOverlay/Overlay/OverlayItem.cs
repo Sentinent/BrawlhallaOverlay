@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace BrawlhallaOverlay.Overlay
 {
@@ -15,6 +16,8 @@ namespace BrawlhallaOverlay.Overlay
 
         public OverlayItem()
         {
+            this.Background = Brushes.Transparent;
+            this.BorderThickness = new Thickness(0);
         }
     }
 }
