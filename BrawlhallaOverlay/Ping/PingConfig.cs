@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Windows.Media;
 
-namespace BrawlhallaOverlay
+namespace BrawlhallaOverlay.Ping
 {
     public class PingConfig
     {

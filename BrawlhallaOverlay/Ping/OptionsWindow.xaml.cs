@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BrawlhallaOverlay
+namespace BrawlhallaOverlay.Ping
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

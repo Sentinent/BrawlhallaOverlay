@@ -13,8 +13,10 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BrawlhallaOverlay.Hooks;
+using BrawlhallaOverlay.Ping;
 
-namespace BrawlhallaOverlay
+namespace BrawlhallaOverlay.Overlay
 {
     /// <summary>
     /// Interaction logic for Overlay.xaml

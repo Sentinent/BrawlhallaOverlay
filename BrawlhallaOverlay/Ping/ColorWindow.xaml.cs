@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 
-namespace BrawlhallaOverlay
+namespace BrawlhallaOverlay.Ping
 {
     /// <summary>
     /// Interaction logic for ColorWindow.xaml

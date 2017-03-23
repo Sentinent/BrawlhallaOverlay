@@ -12,17 +12,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Shapes;    
 using Xceed.Wpf.Toolkit;
 
-namespace BrawlhallaOverlay
+namespace BrawlhallaOverlay.Ping
 {
     /// <summary>
     /// Interaction logic for PingWindow.xaml
     /// </summary>
     public partial class PingWindow : Window
     {
-        public Overlay Overlay;
+        public Overlay.Overlay Overlay;
         public OptionsWindow OptionsWindow;
 
         public ColorWindow ColorSelector;
@@ -37,7 +37,7 @@ namespace BrawlhallaOverlay
 
         private void PingWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Overlay = new Overlay();
+            Overlay = new Overlay.Overlay();
             if (_config.OverlayEnabled)
             {
                 Overlay.Show();

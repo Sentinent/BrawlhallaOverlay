@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-namespace BrawlhallaOverlay
+namespace BrawlhallaOverlay.Ping
 {
     public class PingAverages
     {
@@ -21,14 +21,14 @@ namespace BrawlhallaOverlay
             // Limit our amount of pings to 3
             if (pings.Count > 3)
             {
-                pings = pings.GetRange(0, 3);
+                pings.RemoveRange(3, pings.Count - 3);
             }
             pings.Add(ping);
         }
     }
 
     //Represents a block on the overlay
-    public class PingItem : TextBlock
+    public class PingItem : TextBlock, BrawlhallaOverlay.Overlay.IOverlayItem
     {
         public new string Name;
 
