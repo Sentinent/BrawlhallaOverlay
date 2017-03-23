@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using BrawlhallaOverlay;
 
 namespace BrawlhallaOverlay.Ping
 {
@@ -28,7 +29,7 @@ namespace BrawlhallaOverlay.Ping
     }
 
     //Represents a block on the overlay
-    public class PingItem : TextBlock, BrawlhallaOverlay.Overlay.IOverlayItem
+    public class PingItem : TextBlock, Overlay.IOverlayItem
     {
         public new string Name;
 

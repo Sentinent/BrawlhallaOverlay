@@ -65,6 +65,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Hooks\WindowHook.cs" />
+    <Compile Include="Overlay\IOverlayItem.cs" />
     <Compile Include="Ping\ColorWindow.xaml.cs">
       <DependentUpon>ColorWindow.xaml</DependentUpon>
     </Compile>
@@ -89,7 +91,7 @@
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Overlay.xaml">
+    <Page Include="Overlay\Overlay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -99,7 +101,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Overlay.xaml.cs">
+    <Compile Include="Overlay\Overlay.xaml.cs">
       <DependentUpon>Overlay.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ping\PingWindow.xaml.cs">

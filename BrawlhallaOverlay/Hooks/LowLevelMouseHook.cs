@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace BrawlhallaOverlay.Hooks
 {
-    public class LowLevelMouseHook
+    public static class LowLevelMouseHook
     {
         // Credit to https://blogs.msdn.microsoft.com/toub/2006/05/03/low-level-mouse-hook-in-c/
 

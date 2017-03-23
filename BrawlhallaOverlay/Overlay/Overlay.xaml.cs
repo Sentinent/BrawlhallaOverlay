@@ -23,65 +23,13 @@ namespace BrawlhallaOverlay.Overlay
     /// </summary>
     public partial class Overlay : Window
     {
-        #region Window Detection
-        // Detects when active window changes, stolen from SO :))
-        [DllImport("user32.dll")]
-        static extern int GetWindowLong(IntPtr hwnd, int index);
-
-        [DllImport("user32.dll")]
-        static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
-
-        [DllImport("dwmapi.dll")]
-        static extern void DwmExtendFrameIntoClientArea(IntPtr hWnd, ref int[] pMargins);
-
-        delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
-
-        [DllImport("user32.dll")]
-        static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
-
-        private const uint WINEVENT_OUTOFCONTEXT = 0;
-        private const uint EVENT_SYSTEM_FOREGROUND = 3;
-
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
-        WinEventDelegate dele = null;
-
-        private string GetActiveWindowTitle()
-        {
-            const int nChars = 256;
-            IntPtr handle = IntPtr.Zero;
-            StringBuilder Buff = new StringBuilder(nChars);
-            handle = GetForegroundWindow();
-
-            if (GetWindowText(handle, Buff, nChars) > 0)
-            {
-                return Buff.ToString();
-            }
-            return null;
-        }
-
-        public void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
-        {
-            if (GetActiveWindowTitle() == "Brawlhalla")
-            {
-                this.Topmost = true;
-            }
-            else
-            {
-                this.Topmost = false;
-            }
-        }
-        #endregion
-
         public List<PingItem> PingItems = new List<PingItem>();
 
         private bool _moving;
         private PingItem _selectedItem;
         private Point _relativeMousePos;
+
+        private WindowHook _winHook;
 
         public Overlay()
         {
@@ -112,8 +60,10 @@ namespace BrawlhallaOverlay.Overlay
         private void Overlay_Loaded(object sender, RoutedEventArgs e)
         {
             // Start topmost updater
-            dele = new WinEventDelegate(WinEventProc);
-            var hook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, WINEVENT_OUTOFCONTEXT);
+            _winHook = new WindowHook();
+            _winHook.BrawlhallaOpened += (_, __) => MessageBox.Show("bh opened");
+            _winHook.WindowFocused += (_, __) => this.Topmost = true;
+            _winHook.LostWindowFocus += (_, __) => this.Topmost = false;
 
             // Add ping items
             var config = PingConfig.GetConfig();
