@@ -87,7 +87,7 @@ namespace BrawlhallaOverlay.Ping
 
                 if (_config.OverlayEnabled)
                 {
-                    var item = overlay.PingItems.FirstOrDefault(x => x.Name == button.Content.ToString());
+                    var item = overlay.PingItems.FirstOrDefault(x => x.Server == button.Content.ToString());
                     if (item != null)
                     {
                         overlay.RemoveItem(item);

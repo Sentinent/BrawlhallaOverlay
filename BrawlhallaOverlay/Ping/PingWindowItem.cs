@@ -32,6 +32,7 @@ namespace BrawlhallaOverlay.Ping
             };
             _serverPing = new Label()
             {
+                Content = 0,
                 Width = 50,
                 Margin = new Thickness(5, 2, 20, 2)
             };
@@ -44,14 +45,14 @@ namespace BrawlhallaOverlay.Ping
             _refreshPing.Click += async (sender, e) =>
             {
                 _serverPing.Content = "Pinging...";
-                using (System.Net.NetworkInformation.Ping p = new System.Net.NetworkInformation.Ping())
+                using (var p = new System.Net.NetworkInformation.Ping())
                 {
                     try
                     {
-                        System.Net.NetworkInformation.PingReply reply = await p.SendPingAsync(Utilities.GetIPToPingFromName(_serverName.Content.ToString()));
-                        if (reply.Status == System.Net.NetworkInformation.IPStatus.Success)
+                        var pReply = await p.SendPingAsync(Utilities.GetIPToPingFromName(_serverName.Content.ToString()));
+                        if (pReply.Status == System.Net.NetworkInformation.IPStatus.Success)
                         {
-                            _serverPing.Content = reply.RoundtripTime.ToString();
+                            _serverPing.Content = pReply.RoundtripTime.ToString();
                         }
                         else
                         {

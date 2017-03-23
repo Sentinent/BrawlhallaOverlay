@@ -12,5 +12,9 @@ namespace BrawlhallaOverlay.Overlay
     {
         public double XPos { get; protected set; }
         public double YPos { get; protected set; }
+
+        public OverlayItem()
+        {
+        }
     }
 }
