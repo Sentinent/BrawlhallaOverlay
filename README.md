@@ -1,6 +1,6 @@
-# Brawlhalla Ping Overlay
+# Brawlhalla Overlay
 
-A simple ping checker and in game overlay for <a href="http://www.brawlhalla.com/">Brawlhalla</a>.
+A simple ingame overlay that includes a ping checker for <a href="http://www.brawlhalla.com/">Brawlhalla</a>.
 
 <h2>Download</h2>
 You can get the latest release from <a href="https://github.com/Sentinent/BrawlhallaPingOverlay/releases/latest">here</a>. (You only need to download the .exe)
