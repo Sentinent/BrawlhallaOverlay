@@ -41,7 +41,7 @@ namespace BrawlhallaOverlay.Ping
         {
             Server = serverName;
 
-            var config = PingConfig.GetConfig();
+            var config = ConfigManager.GetPingConfig();
 
             this.FontWeight = FontWeights.UltraBold;
             this.FontSize = config.PingFontSize;

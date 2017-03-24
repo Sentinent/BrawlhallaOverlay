@@ -23,7 +23,7 @@ namespace BrawlhallaOverlay.Ping
     public partial class OptionsWindow : Window
     {
         private Button _selectedPingColorButton;
-        private Config _config = PingConfig.GetConfig();
+        private PingConfig _config = ConfigManager.GetPingConfig();
 
         public OptionsWindow()
         {
@@ -52,7 +52,13 @@ namespace BrawlhallaOverlay.Ping
                 item.FontSize = _config.PingFontSize;
             }
 
-            PingConfig.SaveConfig();
+            ConfigManager.SaveConfig();
+        }
+
+
+        private void GeneralSettings_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         // Servers Enabled
@@ -242,7 +248,7 @@ namespace BrawlhallaOverlay.Ping
             }
             else
             {
-                color = PingConfig.GetDefaultColor(_selectedPingColorButton.Content.ToString());
+                color = Utilities.GetDefaultPingColor(_selectedPingColorButton.Content.ToString());
             }
 
             switch (_selectedPingColorButton.Content)

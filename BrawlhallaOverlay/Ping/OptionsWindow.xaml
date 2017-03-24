@@ -10,6 +10,14 @@
         Title="Brawlhalla Ping Overlay" Closing="OptionsWindow_Closing" Loaded="OptionsWindow_Loaded">
 
     <TabControl TabStripPlacement="Left">
+        <TabItem Header="General Settings">
+            <TabItem.Content>
+                <StackPanel Loaded="GeneralSettings_Loaded">
+                    
+                </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+        
         <TabItem Header="Servers Enabled">
             <TabItem.Content>
                 <StackPanel Loaded="ServersEnabled_Loaded">

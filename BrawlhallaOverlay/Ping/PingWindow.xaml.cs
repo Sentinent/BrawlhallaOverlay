@@ -28,7 +28,7 @@ namespace BrawlhallaOverlay.Ping
         public ColorWindow ColorSelector;
         private CancelEventHandler _preventColorClose;
 
-        private Config _config = PingConfig.GetConfig();
+        private PingConfig _config = ConfigManager.GetPingConfig();
 
         public PingWindow()
         {
@@ -74,7 +74,7 @@ namespace BrawlhallaOverlay.Ping
             var panel = this.Content as StackPanel;
             panel.Children.Clear();
 
-            var config = PingConfig.GetConfig();
+            var config = ConfigManager.GetPingConfig();
             foreach (var server in config.ServersEnabled)
             {
                 var item = new PingWindowItem(server.Name);

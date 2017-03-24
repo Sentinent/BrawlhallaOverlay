@@ -65,6 +65,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigManager.cs" />
+    <Compile Include="Damage\DamageConfig.cs" />
     <Compile Include="Damage\DamageItem.cs" />
     <Compile Include="Hooks\WindowHook.cs" />
     <Compile Include="Overlay\OverlayItem.cs" />

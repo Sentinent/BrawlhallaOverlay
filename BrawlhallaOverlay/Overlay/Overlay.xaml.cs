@@ -66,7 +66,7 @@ namespace BrawlhallaOverlay.Overlay
             _winHook.LostWindowFocus += (_, __) => this.Topmost = false;
 
             // Add ping items
-            var config = PingConfig.GetConfig();
+            var config = ConfigManager.GetPingConfig();
             foreach (var server in config.ServersEnabled)
             {
                 var item = new PingItem(server.Name, server.PingLocation, server.xPos, server.yPos);
@@ -121,8 +121,19 @@ namespace BrawlhallaOverlay.Overlay
             _selectedItem = null;
             _relativeMousePos = default(Point);
 
-            PingConfig.EditServersEnabled(PingItems);
-            PingConfig.SaveConfig();
+            // Save settings
+            var config = ConfigManager.GetPingConfig();
+            if (config.OverlayEnabled) // Make sure the overlay is enabled so we don't end up clearing the list
+            {
+                config.ServersEnabled.Clear();
+
+                foreach (var server in PingItems)
+                {
+                    config.ServersEnabled.Add(new Server(server.Server, server.XPos, server.YPos));
+                }
+            }
+
+            ConfigManager.SaveConfig();
         }
     }
 }
