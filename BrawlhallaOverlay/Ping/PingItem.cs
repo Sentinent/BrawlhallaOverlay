@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,21 +32,19 @@ namespace BrawlhallaOverlay.Ping
     //Represents a block on the overlay
     public class PingItem : OverlayItem
     {
-        public string Server { get; private set; }
-
         private PingAverages _pingAverages = new PingAverages();
         private System.Threading.Timer _pingIPTimer;
         private int _pingErrors = 0;  
 
         public PingItem(string serverName, string ipToPing, double xPos, double yPos) : base()
         {
-            Server = serverName;
+            Identifier = serverName;
+            XPos = xPos;
+            YPos = yPos;
 
             var config = ConfigManager.GetPingConfig();
 
-            this.FontWeight = FontWeights.UltraBold;
             this.FontSize = config.PingFontSize;
-            this.IsHitTestVisible = false;
     
             if (config.GreyBackground)
             {
@@ -53,11 +52,8 @@ namespace BrawlhallaOverlay.Ping
             }
             if (config.PingOutline)
             {
-                this.Effect = new DropShadowEffect() { ShadowDepth = 0, BlurRadius = 5, Color = Colors.White, Opacity = 1 };
+                this.Effect = new DropShadowEffect() { ShadowDepth = 0, BlurRadius = 2, Color = Colors.White, Opacity = 1 };
             }
-
-            XPos = xPos;
-            YPos = yPos;
 
             _pingIPTimer = new System.Threading.Timer(async (state) =>
             {
@@ -66,17 +62,15 @@ namespace BrawlhallaOverlay.Ping
                     try
                     {
                         var pReply = await ping.SendPingAsync(ipToPing);
-                        if (pReply.Status == System.Net.NetworkInformation.IPStatus.Success)
+                        if (pReply.Status == IPStatus.Success)
                         {
                             _pingAverages.Add((int)pReply.RoundtripTime);
                             _pingErrors = 0;
                         }
-                        else if (pReply.Status == System.Net.NetworkInformation.IPStatus.TimedOut)
+                        else if (pReply.Status == IPStatus.TimedOut)
                         {
                             _pingErrors++;
                         }
-
-                        // If we fail 3 pings in a row, set the ping to "ERROR"
                     }
                     catch
                     {
@@ -86,6 +80,7 @@ namespace BrawlhallaOverlay.Ping
 
                 this.Dispatcher.Invoke(() =>
                 {
+                    // If we fail 3 pings in a row, set the ping to "ERROR"
                     if (_pingErrors == 3)
                     {
                         this.Text = $"{serverName}: ERROR";
@@ -100,21 +95,6 @@ namespace BrawlhallaOverlay.Ping
                     }
                 });
             }, null, 0, 1000);
-        }
-
-        public void MoveTo(double x, double y)
-        {
-            this.XPos = x;
-            this.YPos = y;
-
-            Canvas.SetLeft(this, XPos);
-            Canvas.SetTop(this, YPos);
-        }
-
-        public bool IsPointOver(int x, int y)
-        {
-            return (x >= XPos && x <= (XPos + this.ActualWidth))
-                && (y >= YPos && y <= (YPos + this.ActualHeight));
         }
     }
 }

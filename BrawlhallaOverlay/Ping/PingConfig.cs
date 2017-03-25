@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.Windows.Media;
+using Newtonsoft.Json;
 
 namespace BrawlhallaOverlay.Ping
 {
@@ -53,35 +53,32 @@ namespace BrawlhallaOverlay.Ping
             }
         }
 
-        [NonSerialized]
+        [JsonIgnore]
         private Color _lowPingColor;
-        [NonSerialized]
+        [JsonIgnore]
         private Color _mediumPingColor;
-        [NonSerialized]
+        [JsonIgnore]
         private Color _highPingColor;
 
-        [NonSerialized]
+        [JsonIgnore]
         public Brush LowPingBrush;
-        [NonSerialized]
+        [JsonIgnore]
         public Brush MediumPingBrush;
-        [NonSerialized]
+        [JsonIgnore]
         public Brush HighPingBrush;
     }
 
     public class Server
     {
         public string Name { get; set; }
-        public string PingLocation { get; set; }
-        public double xPos { get; set; }
-        public double yPos { get; set; }
+        public double XPos { get; set; }
+        public double YPos { get; set; }
 
         public Server(string name, double x, double y)
         {
             this.Name = name;
-            this.xPos = x;
-            this.yPos = y;
-
-            PingLocation = Utilities.GetIPToPingFromName(name);
+            this.XPos = x;
+            this.YPos = y;
         }
     }
 }

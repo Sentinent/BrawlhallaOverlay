@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrawlhallaOverlay.Ping
 {
@@ -50,7 +51,7 @@ namespace BrawlhallaOverlay.Ping
                     try
                     {
                         var pReply = await p.SendPingAsync(Utilities.GetIPToPingFromName(_serverName.Content.ToString()));
-                        if (pReply.Status == System.Net.NetworkInformation.IPStatus.Success)
+                        if (pReply.Status == IPStatus.Success)
                         {
                             _serverPing.Content = pReply.RoundtripTime.ToString();
                         }

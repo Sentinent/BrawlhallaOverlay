@@ -23,10 +23,8 @@ namespace BrawlhallaOverlay.Overlay
     /// </summary>
     public partial class Overlay : Window
     {
-        public List<PingItem> PingItems = new List<PingItem>();
-
         private bool _moving;
-        private PingItem _selectedItem;
+        private OverlayItem _selectedItem;
         private Point _relativeMousePos;
 
         private WindowHook _winHook;
@@ -36,23 +34,20 @@ namespace BrawlhallaOverlay.Overlay
             InitializeComponent();
         }
 
-        public void AddItem(PingItem item)
+        public void AddItem(OverlayItem item)
         {
-            PingItems.Add(item);
             (this.Content as Canvas).Children.Add(item);
             item.MoveTo(item.XPos, item.YPos);
         }
 
-        public void RemoveItem(PingItem item)
+        public void RemoveItem(OverlayItem item)
         {
-            PingItems.Remove(item);
-
-            foreach (PingItem child in (this.Content as Canvas).Children)
+            foreach (OverlayItem child in (this.Content as Canvas).Children)
             {
-                if (child.Server == item.Server)
+                if (child.Identifier == item.Identifier)
                 {
                     (this.Content as Canvas).Children.Remove(child);
-                    break;
+                    return;
                 }
             }
         }
@@ -69,8 +64,7 @@ namespace BrawlhallaOverlay.Overlay
             var config = ConfigManager.GetPingConfig();
             foreach (var server in config.ServersEnabled)
             {
-                var item = new PingItem(server.Name, server.PingLocation, server.xPos, server.yPos);
-                PingItems.Add(item);
+                var item = new PingItem(server.Name, Utilities.GetIPToPingFromName(server.Name), server.XPos, server.YPos);
 
                 (this.Content as Canvas).Children.Add(item);
                 item.MoveTo(item.XPos, item.YPos);
@@ -94,12 +88,12 @@ namespace BrawlhallaOverlay.Overlay
         {
             if (Keyboard.IsKeyDown(Key.LeftShift))
             {
-                foreach (PingItem pingItem in (this.Content as Canvas).Children)
+                foreach (OverlayItem item in (this.Content as Canvas).Children)
                 {
-                    if (pingItem.IsPointOver(e.MouseXPos, e.MouseYPos))
+                    if (item.IsPointOver(e.MouseXPos, e.MouseYPos))
                     {
                         _moving = true;
-                        _selectedItem = pingItem;
+                        _selectedItem = item;
                         _relativeMousePos = Mouse.GetPosition(_selectedItem);
                         return; // Only want to move 1 at a time for overlapping elements
                     }
@@ -127,9 +121,9 @@ namespace BrawlhallaOverlay.Overlay
             {
                 config.ServersEnabled.Clear();
 
-                foreach (var server in PingItems)
+                foreach (var server in (this.Content as Canvas).Children.OfType<PingItem>())
                 {
-                    config.ServersEnabled.Add(new Server(server.Server, server.XPos, server.YPos));
+                    config.ServersEnabled.Add(new Server(server.Identifier, server.XPos, server.YPos));
                 }
             }
 
